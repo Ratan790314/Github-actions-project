@@ -1,0 +1,31 @@
+name : Deployment Workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: lint
+              run: npm run lint
+
+            - name: test code
+              run: npm run test
+
+            - name: Build code
+              run: npm run build
+
+            - name: Deploy code
+              run: echo "deploying code to production server"

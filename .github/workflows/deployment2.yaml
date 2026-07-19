@@ -1,0 +1,15 @@
+name: Issue Automation
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - milestoned
+      - labeled
+jobs:
+  issue-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output issue information
+        run: |
+          echo "Issue title: ${{ toJson(github.event) }}"
